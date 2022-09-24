@@ -350,7 +350,11 @@ class EDRServer(object):
             EDRLOG.log(u"Backing off from Inara API calls", "DEBUG")
             return None
 
-        EDRLOG.log(u"Requesting Inara profile for {}".format(cmdr), "INFO")             
+        EDRLOG.log(u"Requesting Inara profile for {}".format(cmdr), "INFO")      
+        # WARNING
+        #   - If this API Key the cmdrs own, could potentially be gathered and re-used
+        # MITIGATION
+        #   - sqdn could share a blank Inara profile's API key for everyone to use       
         headers = {
             "Authorization": "ApiKey {}".format(self.INARA_API_KEY),
             "X-EDR-UID": self.uid()

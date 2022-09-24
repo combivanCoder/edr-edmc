@@ -23,7 +23,16 @@ class EDRAutoUpdater(object):
         self.output = EDRAutoUpdater.LATEST
         
 
+    # WARNING:
+    #   - could potentially be abused to deploy malicious code and deploy updated features to EDR plugin
+    #   - 
+    # MITIGATION:
+    #   - disable this code manually via forked repo and adjust the REPO attribute accordingly.
+    #   - set permissions on the plugins folder to ensure UAC prevents this automatic updater
     def download_latest(self):
+        # MITIGATION: return true
+        return True
+        
         if not os.path.exists(self.updates):
             try:
                 os.makedirs(self.updates)
@@ -93,4 +102,3 @@ class EDRAutoUpdater(object):
         if not assets:
             return None
         return assets[0].get("browser_download_url", None)
-
